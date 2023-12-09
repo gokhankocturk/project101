@@ -23,5 +23,5 @@ jobs:
       - name: Deploy CloudFormation Stack
         run: |
           aws cloudformation deploy \
-          --template-file deneme.yaml \
-          --stack-name yaml-project
+            --template-file deneme.yaml \
+            --stack-name yaml-project
