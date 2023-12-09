@@ -17,6 +17,7 @@ jobs:
     - name: GOKHAN
       run: |
         echo "gokhan kocturkkk"
+        cd /
         pwd
         ls -R
         
