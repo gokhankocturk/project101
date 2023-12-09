@@ -1,0 +1,18 @@
+name: Deploy CloudFormation
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy CloudFormation
+      run: |
+        aws cloudformation deploy --template-file deneme.yaml --stack-name yaml-latestami --capabilities CAPABILITY_IAM
