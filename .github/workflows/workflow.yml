@@ -23,4 +23,4 @@ jobs:
         aws configure set aws_access_key_id AKIAVUSSDOVCE3PO4PVM
         aws configure set aws_secret_access_key 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
         aws configure set region us-east-1
-        ls -R
+        aws cloudformation deploy --template-file deneme.yml --stack-name yaml-project
