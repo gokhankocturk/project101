@@ -3,7 +3,7 @@ name: Deploy CloudFormation
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -13,6 +13,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Use Node.js 14
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install AWS CLI
+      run: |
+        npm install -g aws-cli
+
     - name: Deploy CloudFormation
       run: |
-        aws cloudformation deploy --template-file deneme.yaml --stack-name yaml-latestami --capabilities CAPABILITY_IAM
+        aws cloudformation deploy --template-file deneme.yml --stack-name yaml-latestami --capabilities CAPABILITY_IAM
