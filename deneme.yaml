@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: |
-  Gokhan Kocturk Proje101
+  GGGGokhan Kocturk Proje101
 
 Parameters:
   LatestAmiId:
@@ -38,7 +38,7 @@ Resources:
   PROJECTsecgroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Allows SSH and HTTP connection
+      GroupDescription: AAAllows SSH and HTTP connection
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
