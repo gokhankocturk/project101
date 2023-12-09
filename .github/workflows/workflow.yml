@@ -16,7 +16,7 @@ jobs:
 
     - name: GOKHAN
       run: |
-        echo "gokhan kocturk"
+        echo "gokhan kocturkkk"
         
     - name: Deploy CloudFormation
       run: |
