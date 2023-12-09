@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: |
- XXXXX Bsadaderen Gokhan Kocturk Proje101
+ YYYY XXXXX Bsadaderen Gokhan Kocturk Proje101
 
 Parameters:
   LatestAmiId:
