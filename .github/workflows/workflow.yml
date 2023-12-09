@@ -20,4 +20,4 @@ jobs:
         
     - name: Deploy CloudFormation
       run: |
-        aws cloudformation deploy --template-file deneme.yml --stack-name yaml-latestami --capabilities CAPABILITY_IAM
+        aws cloudformation deploy --template-file deneme.yaml --stack-name yaml-latestami --capabilities CAPABILITY_IAM
