@@ -10,18 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Use Node.js 14
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
-
     - name: Install AWS CLI
       run: |
         npm install -g aws-cli
 
+    - name: GOKHAN
+      run: |
+        echo "gokhan kocturk"
+        
     - name: Deploy CloudFormation
       run: |
         aws cloudformation deploy --template-file deneme.yml --stack-name yaml-latestami --capabilities CAPABILITY_IAM
