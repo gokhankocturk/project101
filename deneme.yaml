@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: |
-  Gokhan Kocturk Proje101
+ asdada Gokhan Kocturk Proje101
 
 Parameters:
   LatestAmiId:
