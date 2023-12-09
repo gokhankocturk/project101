@@ -24,4 +24,4 @@ jobs:
         run: |
           aws cloudformation update-stack \
           --stack-name yaml-project \
-          --template-body file:deneme.yaml
+          --template-body file://deneme.yaml
