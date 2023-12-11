@@ -1,0 +1,32 @@
+# CI/CD pipeline icerisinde calismasi icin projemizin rootunda ".github/workflows/workflow.yaml" pathinde
+# bir yaml oluşturup aşağıdaki kodları oraya yapıştırıyoruz. Sonrasında githuba localimizden her push 
+# yaptığımızda değişikliklerin, oluşturduğumuz web sitesine de yansımasını sağlıyoruz.
+# Hata çıkarsa üzerinde çalış. ACCESS ve SECRET KEYLERİ direk verme, şifreleyip nasıl verileceğini bul.
+
+name: Deploy CloudFormation Stack
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ACCESSKEYGIR_GIZLIOLSUN
+          aws-secret-access-key: SECRETACCESSKEYGIR_GIZLIOLSUN
+          aws-region: us-east-1
+
+      - name: Deploy CloudFormation Stack
+        run: |
+          aws cloudformation deploy \
+            --template-file deneme.yaml \
+            --stack-name yaml-project
