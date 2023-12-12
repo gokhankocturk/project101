@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  Gokhan Kocturk Project101
+
+Parameters:
+  SSMimage:
+    Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
+    Default: "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+
+  AWSkeypair:
+    Description: Choose your keypair
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: mykey
+
+  CUSTOMinstancetype:
+    Description: Choose your instance type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t3.micro
+      - t2.large
+
+Resources:
+  myWebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref SSMimage
+      InstanceType: !Ref CUSTOMinstancetype
+      KeyName: !Ref AWSkeypair
+      SecurityGroupIds:
+        - !Ref mySecGrp # !GetAtt mySecGrp.GroupId
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}
+      UserData: !Base64 |
+        #! /bin/bash
+        dnf update -y
+        dnf install httpd -y
+        dnf install wget -y
+        FOLDER="https://raw.githubusercontent.com/gokhankocturk/project101/main/static-web"
+        cd /var/www/html
+        wget ${FOLDER}/index.html
+        wget ${FOLDER}/cat0.jpg
+        wget ${FOLDER}/cat1.jpg
+        wget ${FOLDER}/cat2.jpg
+        systemctl start httpd
+        systemctl enable httpd
+
+  mySecGrp:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: ssh and http # Required
+      GroupName: gokhan-project-scgrp
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  webSiteURL:
+    Description: URL of Gokhan Website
+    Value: !Sub
+      - http://${PublicDNS}
+      - PublicDNS: !GetAtt myWebServer.PublicDnsName
